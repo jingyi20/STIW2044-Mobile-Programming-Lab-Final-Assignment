@@ -3,7 +3,9 @@
 Lab Assignment 2: Homestay Raya
 
 Name: Ooi Jing Yi
+
 Matric Number: 279797
+
 Group: B
 
 ## Homestay Raya
