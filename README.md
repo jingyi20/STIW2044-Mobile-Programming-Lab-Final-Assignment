@@ -1,10 +1,10 @@
-# homestayraya
+# Homestay Raya
 
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The application is a client-side application used to search and book homestays around Malaysia. The app include a splash screen, a user login screen, a user registration screen and a profile screen. 
 
 A few resources to get you started if this is your first Flutter project:
 
