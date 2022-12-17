@@ -31,8 +31,6 @@
   }
   $conn->close();
   
-  //echo $name;
-  
   function sendJsonResponse($sentArray)
   {
 	  header('Content-Type: application/json');
