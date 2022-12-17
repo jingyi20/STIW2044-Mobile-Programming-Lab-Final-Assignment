@@ -7,7 +7,6 @@ import 'package:homestayraya/views/screens/registrationscreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -220,7 +219,6 @@ class _LoginScreenState extends State<LoginScreen> {
         var jsonResponse = json.decode(response.body);
         if (response.statusCode == 200 && jsonResponse['status'] == "success") {
           User user = User.fromJson(jsonResponse['data']);
-          // User user = User(id: jsonResponse['data']['id'], email: jsonResponse['email'], name: jsonResponse['name'], address: jsonResponse['address'], regdate: jsonResponse['regdate']);
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -232,7 +230,6 @@ class _LoginScreenState extends State<LoginScreen> {
           Fluttertoast.showToast(
               msg: "Login Failed",
               toastLength: Toast.LENGTH_SHORT,
-              // backgroundColor: Colors.red,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
               fontSize: 14.0);
