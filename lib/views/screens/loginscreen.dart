@@ -226,6 +226,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   user: user,
                 ),
               ));
+              Fluttertoast.showToast(
+              msg: "Login Success",
+              toastLength: Toast.LENGTH_SHORT,
+              backgroundColor: Colors.green,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              fontSize: 14.0);
         } else {
           Fluttertoast.showToast(
               msg: "Login Failed",
