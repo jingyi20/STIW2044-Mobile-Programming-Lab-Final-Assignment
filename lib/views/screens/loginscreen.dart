@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:homestayraya/config.dart';
 import 'package:homestayraya/modals/user.dart';
 import 'package:homestayraya/views/screens/mainscreen.dart';
 import 'package:homestayraya/views/screens/registrationscreen.dart';
@@ -210,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String _email = _emailEditingController.text;
     String _pass = _passEditingController.text;
     try {
-      http.post(Uri.parse("http://192.168.1.8/homestayraya/php/login_user.php"),
+      http.post(Uri.parse("${Config.SERVER}/php/login_user.php"),
           body: {
             "email": _email,
             "password": _pass,

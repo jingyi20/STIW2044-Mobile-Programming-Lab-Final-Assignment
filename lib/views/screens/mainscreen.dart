@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:homestayraya/modals/user.dart';
-import 'package:homestayraya/views/screens/loginscreen.dart';
-import 'package:homestayraya/views/screens/registrationscreen.dart';
 import 'package:homestayraya/views/shared/mainmenu.dart';
 
 
@@ -20,21 +18,10 @@ class _MainScreenState extends State<MainScreen> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(title: const Text("Home", style: TextStyle(fontSize: 25, fontStyle: FontStyle.normal),),
-        actions: [
-          IconButton(onPressed: _registrationForm, icon: const Icon(Icons.app_registration)),
-          IconButton(onPressed: _loginForm, icon: const Icon(Icons.login))],
         ),
         body: const Center(child: Text("Welcome to Homestay Raya")),
         drawer: MainMenuWidget(user: widget.user,),
       ),
     );
-  }
-
-  void _registrationForm() {
-    Navigator.push(context, MaterialPageRoute(builder: (content) => const RegistrationScreen()));
-  }
-
-  void _loginForm() {
-    Navigator.push(context, MaterialPageRoute(builder: (content) => const LoginScreen()));
   }
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homestayraya/config.dart';
 import 'package:homestayraya/modals/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -74,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
     String _email = (prefs.getString('email')) ?? '';
     String _password = (prefs.getString('password')) ?? '';
     if (_email.isNotEmpty && _password.isNotEmpty) {
-      http.post(Uri.parse("http://192.168.1.8/homestayraya/php/login_user.php"),
+      http.post(Uri.parse("${Config.SERVER}/php/login_user.php"),
           body: {
             "email": _email,
             "password": _password,
