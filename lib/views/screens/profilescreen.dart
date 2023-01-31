@@ -369,6 +369,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   _galleryPicker() async {
+    Navigator.pop(context);
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
@@ -382,6 +383,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   _cameraPicker() async {
+    Navigator.pop(context);
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: ImageSource.camera,
@@ -666,63 +668,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
                 changePass();
-              },
-            ),
-            TextButton(
-              child: const Text(
-                "No",
-                style: TextStyle(),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _updateAddressDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          title: const Text(
-            "Change Address?",
-            style: TextStyle(),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                minLines: 6,
-                maxLines: 6,
-                controller: _addressController,
-                decoration: InputDecoration(
-                    labelText: 'Home Address',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your home address';
-                  }
-                  return null;
-                },
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text(
-                "Yes",
-                style: TextStyle(),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
               },
             ),
             TextButton(
