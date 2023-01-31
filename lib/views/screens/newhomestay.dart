@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:homestayraya/config.dart';
-import 'package:homestayraya/modals/user.dart';
+import 'package:homestayraya/serverconfig.dart';
+import 'package:homestayraya/models/user.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
@@ -75,20 +75,23 @@ class _NewHomestayScreenState extends State<NewHomestayScreen> {
             Center(
               child: SizedBox(
                 height: 250,
-                child: PageView.builder(
-                    itemCount: 3,
-                    controller: PageController(viewportFraction: 0.7),
-                    onPageChanged: (int index) =>
-                        setState(() => _index = index),
-                    itemBuilder: (BuildContext context, int index) {
-                      if (index == 0) {
-                        return image1();
-                      } else if (index == 1) {
-                        return image2();
-                      } else {
-                        return image3();
-                      }
-                    }),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: PageView.builder(
+                      itemCount: 3,
+                      controller: PageController(viewportFraction: 0.7),
+                      onPageChanged: (int index) =>
+                          setState(() => _index = index),
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index == 0) {
+                          return image1();
+                        } else if (index == 1) {
+                          return image2();
+                        } else {
+                          return image3();
+                        }
+                      }),
+                ),
               ),
             ),
             const SizedBox(
@@ -113,11 +116,7 @@ class _NewHomestayScreenState extends State<NewHomestayScreen> {
                         validator: (val) => val!.isEmpty || (val.length < 3)
                             ? "Homestay name must be longer than 3"
                             : null,
-                        // onFieldSubmitted: (v) {
-                        //   FocusScope.of(context).requestFocus(focus);
-                        // },
                         keyboardType: TextInputType.text,
-                        // cursor
                         decoration: const InputDecoration(
                             labelText: 'Homestay name',
                             labelStyle: TextStyle(),
@@ -135,9 +134,6 @@ class _NewHomestayScreenState extends State<NewHomestayScreen> {
                         validator: (val) => val!.isEmpty || (val.length < 3)
                             ? "Homestay address must be longer than 3"
                             : null,
-                        // onFieldSubmitted: (v) {
-                        //   FocusScope.of(context).requestFocus(focus);
-                        // },
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                             labelText: 'Homestay address',
@@ -465,7 +461,7 @@ class _NewHomestayScreenState extends State<NewHomestayScreen> {
     String base64Image2 = base64Encode(_imageList[1].readAsBytesSync());
     String base64Image3 = base64Encode(_imageList[2].readAsBytesSync());
 
-    http.post(Uri.parse("${Config.SERVER}/php/insert_homestay.php"), body: {
+    http.post(Uri.parse("${ServerConfig.SERVER}/php/insert_homestay.php"), body: {
       "userid": widget.user.id,
       "hsname": hsname,
       "hsdesc": hsdesc,

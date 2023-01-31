@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:homestayraya/config.dart';
-import 'package:homestayraya/modals/user.dart';
+import 'package:homestayraya/serverconfig.dart';
+import 'package:homestayraya/models/user.dart';
 import 'package:homestayraya/views/screens/loginscreen.dart';
 import 'package:http/http.dart' as http;
 import 'mainscreen.dart';
@@ -383,7 +383,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   void _registerUser(String name, String email, String phone, String pass) {
     try {
-      http.post(Uri.parse("${Config.SERVER}/php/register_user.php"),
+      http.post(Uri.parse("${ServerConfig.SERVER}/php/register_user.php"),
           body: {
             "name": name,
             "email": email,

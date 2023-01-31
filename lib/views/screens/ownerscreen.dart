@@ -1,15 +1,15 @@
 import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:homestayraya/config.dart';
-import 'package:homestayraya/modals/homestay.dart';
-import 'package:homestayraya/modals/user.dart';
+import 'package:homestayraya/serverconfig.dart';
+import 'package:homestayraya/models/homestay.dart';
+import 'package:homestayraya/models/user.dart';
 import 'package:homestayraya/views/screens/loginscreen.dart';
 import 'package:homestayraya/views/screens/newhomestay.dart';
+import 'package:homestayraya/views/screens/ownerhsdetailscreen.dart';
 import 'package:homestayraya/views/screens/registrationscreen.dart';
 import 'package:homestayraya/views/shared/mainmenu.dart';
 import 'package:intl/intl.dart';
@@ -93,7 +93,7 @@ class _OwnerScreenState extends State<OwnerScreen> {
                           elevation: 8,
                           child: InkWell(
                             onTap: () {
-                              // _showDetails(index);
+                              _showDetails(index);
                             },
                             onLongPress: () {
                               _deleteDialog(index);
@@ -108,7 +108,7 @@ class _OwnerScreenState extends State<OwnerScreen> {
                                   width: resWidth / 2,
                                   fit: BoxFit.cover,
                                   imageUrl:
-                                      "${Config.SERVER}/assets/homestayimages/${homestayList[index].homestayId}_1.png",
+                                      "${ServerConfig.SERVER}/assets/homestayimages/${homestayList[index].homestayId}_1.png",
                                   placeholder: (context, url) =>
                                       const LinearProgressIndicator(),
                                   errorWidget: (context, url, error) =>
@@ -256,7 +256,7 @@ class _OwnerScreenState extends State<OwnerScreen> {
     http
         .get(
       Uri.parse(
-          "${Config.SERVER}/php/loadhomestays.php?userid=${widget.user.id}"),
+          "${ServerConfig.SERVER}/php/loadhomestays.php?userid=${widget.user.id}"),
     )
         .then((response) {
       // wait for response from the request
@@ -340,7 +340,7 @@ class _OwnerScreenState extends State<OwnerScreen> {
 
   void _deleteHomestay(index) {
     try {
-      http.post(Uri.parse("${Config.SERVER}/php/delete_homestay.php"), body: {
+      http.post(Uri.parse("${ServerConfig.SERVER}/php/delete_homestay.php"), body: {
         "homestayid": homestayList[index].homestayId,
       }).then((response) {
         var data = jsonDecode(response.body);
@@ -366,6 +366,19 @@ class _OwnerScreenState extends State<OwnerScreen> {
     } catch (e) {
       print(e.toString());
     }
+  }
+  
+  Future<void> _showDetails(int index) async {
+    Homestay homestay = Homestay.fromJson(homestayList[index].toJson());
+
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (content) => HomestayDetailsScreen(
+                  homestay: homestay,
+                  user: widget.user,
+                )));
+    _loadHomestays();
   }
 }
 

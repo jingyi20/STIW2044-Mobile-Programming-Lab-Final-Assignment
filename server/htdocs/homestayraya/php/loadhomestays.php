@@ -7,7 +7,7 @@
 	}
 	$userid = $_GET['userid'];
 	include_once("dbconnect.php");
-	$sqlloadhomestay = "SELECT * FROM tbl_homestay WHERE user_id = '$userid'";
+	$sqlloadhomestay = "SELECT * FROM tbl_homestay WHERE user_id = '$userid' ORDER BY homestay_date DESC";
 	$result = $conn->query($sqlloadhomestay);
 	if ($result->num_rows > 0) {
 		$homestaysarray["homestay"] = array();

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:homestayraya/modals/user.dart';
+import 'package:homestayraya/models/user.dart';
+import 'package:homestayraya/serverconfig.dart';
 import 'package:homestayraya/views/screens/mainscreen.dart';
 import 'package:homestayraya/views/screens/ownerscreen.dart';
 import 'package:homestayraya/views/screens/profilescreen.dart';
@@ -14,6 +16,8 @@ class MainMenuWidget extends StatefulWidget {
 }
 
 class _MainMenuWidgetState extends State<MainMenuWidget> {
+  var pathAsset = "assets/images/profile.png";
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,22 +26,39 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-            accountEmail: Text(widget.user.email.toString()), // keep blank text because email is required
-            accountName: Text(widget.user.name.toString()),
-            currentAccountPicture: const CircleAvatar(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/profilebackground.jpg'),
+                    opacity: 0.5,
+                    fit: BoxFit.fill)),
+            accountEmail: Text(
+              widget.user.email.toString(),
+              style: const TextStyle(color: Colors.black),
+            ),
+            // keep blank text because email is required
+            accountName: Text(widget.user.name.toString(),
+                style: const TextStyle(color: Colors.black, fontSize: 18)),
+            currentAccountPicture: CircleAvatar(
               radius: 30.0,
-              child: Icon(Icons.person_sharp, size:50),
+              child: ClipOval(
+                child: CachedNetworkImage(
+                    imageUrl:
+                        "${ServerConfig.SERVER}/assets/profileimages/${widget.user.id}.png",
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        Image.asset(pathAsset)),
+              ),
             ),
           ),
           ListTile(
-            title: 
-            Row(
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Flexible(
                     flex: 5,
-                    child: Image.asset('assets/images/homeicon.png',
-                        scale: 2.0)),
+                    child:
+                        Image.asset('assets/images/homeicon.png', scale: 2.0)),
                 const Text('    '),
                 const Text('Home', style: TextStyle(fontSize: 16)),
               ],
@@ -45,16 +66,16 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
-                context,
-                EnterExitRoute(
-                  exitPage: MainScreen(user: widget.user,),
-                  enterPage: MainScreen(user: widget.user)
-              ));
+                  context,
+                  EnterExitRoute(
+                      exitPage: MainScreen(
+                        user: widget.user,
+                      ),
+                      enterPage: MainScreen(user: widget.user)));
             },
           ),
           ListTile(
-            title: 
-            Row(
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Flexible(
@@ -68,11 +89,12 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
-                context,
-                EnterExitRoute(
-                  exitPage: MainScreen(user: widget.user,),
-                  enterPage: OwnerScreen(user: widget.user)
-              ));
+                  context,
+                  EnterExitRoute(
+                      exitPage: MainScreen(
+                        user: widget.user,
+                      ),
+                      enterPage: OwnerScreen(user: widget.user)));
             },
           ),
           ListTile(
@@ -93,8 +115,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                   context,
                   EnterExitRoute(
                       exitPage: MainScreen(user: widget.user),
-                      enterPage: ProfileScreen(user: widget.user)
-                      ));
+                      enterPage: ProfileScreen(user: widget.user)));
             },
           ),
         ],
