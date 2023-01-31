@@ -1,6 +1,6 @@
-# STIW2044 Mobile Programming Lab Midterm Assignment
+# STIW2044 Mobile Programming Lab Final Assignment
 
-Lab Midterm Assignment: Homestay Raya
+Lab Final Assignment: Homestay Raya
 
 Name: Ooi Jing Yi
 
@@ -10,6 +10,6 @@ Group: B
 
 ## Homestay Raya
 
-The application is a client-side application used to search and book homestays around Malaysia. The app include a splash screen, a main screen, a user login screen, a user registration screen and a profile screen. The application allows the registered user to be able to insert their new homestay data. 
+The application is a client-side application used to search and book homestays around Malaysia. The app include a splash screen, a main screen, a owner screen, a user login screen, a user registration screen and a profile screen.
 
 ### Screenshots
